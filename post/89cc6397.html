@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="博客,源码,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="简介本篇博客主要是介绍如何实现全屏 Dialog ,以及部分原理，具体细节可以参考对应 Dialog 的源码实现。  基础知识前提讲解前你需要具备如何去写一个 Dialog 的基础知识，因为本篇博客不会很细节的讲解此处内容，此博客会着重讲解如何实现一个全屏的 Dialog ，当然有关此篇博客中探讨出现的问题或者其他的疑问欢迎留言提问 ~。  简介本篇博客主要是介绍如何实现全屏Dialog,以及部分">
+<meta name="keywords" content="博客,源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全屏到任意宽高的Dialog的写法">
+<meta property="og:url" content="http://guohaiyang.tk/post/89cc6397.html">
+<meta property="og:site_name" content="Android探索之路">
+<meta property="og:description" content="简介本篇博客主要是介绍如何实现全屏 Dialog ,以及部分原理，具体细节可以参考对应 Dialog 的源码实现。  基础知识前提讲解前你需要具备如何去写一个 Dialog 的基础知识，因为本篇博客不会很细节的讲解此处内容，此博客会着重讲解如何实现一个全屏的 Dialog ，当然有关此篇博客中探讨出现的问题或者其他的疑问欢迎留言提问 ~。  简介本篇博客主要是介绍如何实现全屏Dialog,以及部分">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ozbc8g1sr.bkt.clouddn.com/Screenshot_1510504940.png">
+<meta property="og:image" content="http://ozbc8g1sr.bkt.clouddn.com/device-2017-11-13-010314.png">
+<meta property="og:updated_time" content="2017-12-26T17:44:13.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="全屏到任意宽高的Dialog的写法">
+<meta name="twitter:description" content="简介本篇博客主要是介绍如何实现全屏 Dialog ,以及部分原理，具体细节可以参考对应 Dialog 的源码实现。  基础知识前提讲解前你需要具备如何去写一个 Dialog 的基础知识，因为本篇博客不会很细节的讲解此处内容，此博客会着重讲解如何实现一个全屏的 Dialog ，当然有关此篇博客中探讨出现的问题或者其他的疑问欢迎留言提问 ~。  简介本篇博客主要是介绍如何实现全屏Dialog,以及部分">
+<meta name="twitter:image" content="http://ozbc8g1sr.bkt.clouddn.com/Screenshot_1510504940.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键词进行搜索","hits_empty":"找不到有关『${query}』的文章，是不是去火星了？","hits_stats":"呼哧呼哧~~ 总于找到${hits} 篇文章，花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guohaiyang.tk/post/89cc6397.html">
+
+
+
+
+
+  <title>全屏到任意宽高的Dialog的写法 | Android探索之路</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <!-- 添加github fork me -->
+    <a href="https://github.com/guohaiyang1992" rel="external nofollow noopener noreferrer" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Android探索之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">吾将上下而求索</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guohaiyang.tk/post/89cc6397.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="guohaiyang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://avatar.csdn.net/E/A/A/1_guohaiyang1992.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Android探索之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">全屏到任意宽高的Dialog的写法</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T11:47:00+08:00">
+                2017-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/那些坑/" itemprop="url" rel="index">
+                    <span itemprop="name">那些坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/post/89cc6397.html" class="leancloud_visitors" data-flag-title="全屏到任意宽高的Dialog的写法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读热度</span>
+               
+                 <span class="leancloud-visitors-count"></span> ℃
+             </span>
+          
+
+          
+
+          
+            <br>
+            <div class="post-wordcount">
+              
+                <!--
+                  <span class="post-meta-divider">|</span>
+                -->
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,646 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h2><p>本篇博客主要是介绍如何实现全屏 <code>Dialog</code> ,以及部分原理，具体细节可以参考对应 <code>Dialog</code> 的源码实现。</p>
+<hr>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a><strong>基础知识</strong></h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a><strong>前提</strong></h3><p>讲解前你需要具备如何去写一个 <code>Dialog</code> 的基础知识，因为本篇博客不会很细节的讲解此处内容，此博客会着重讲解如何实现一个全屏的 <code>Dialog</code> ，当然有关此篇博客中探讨出现的问题或者其他的疑问欢迎留言提问 ~。</p>
+<hr>
+<h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a><strong>简介</strong></h2><p>本篇博客主要是介绍如何实现全屏<code>Dialog</code>,以及部分原理，具体细节可以参考对应<code>Dialog</code>的源码实现。</p>
+<hr>
+<h2 id="基础知识-1"><a href="#基础知识-1" class="headerlink" title="基础知识"></a><strong>基础知识</strong></h2><h3 id="前提-1"><a href="#前提-1" class="headerlink" title="前提"></a><strong>前提</strong></h3><p>讲解前你需要具备如何去写一个<code>Dialog</code>的基础知识，因为本篇博客不会很细节的讲解此处内容，此博客会着重讲解如何实现一个全屏的<code>Dialog</code>，当然有关此篇博客中探讨出现的问题或者其他的疑问欢迎留言提问 ~。</p>
+<hr>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a><strong>实现方式</strong></h2><h3 id="通过设置Style实现Dialog全屏"><a href="#通过设置Style实现Dialog全屏" class="headerlink" title="通过设置Style实现Dialog全屏"></a><strong>通过设置Style实现Dialog全屏</strong></h3><p>此方法比较简单的就可以实现全屏的<code>Dialog</code>，我们看下如何实现呢。</p>
+<p>首先需要在res/values/styles.xml内写入如下代码即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--此处的名字可以任意写，只要使用的时候匹配到即可--&gt;</span><br><span class="line">&lt;style name=&quot;dialog_style_1&quot;&gt;</span><br><span class="line">    &lt;!--注意此处的属性，设置此属性后即可实现Dilaog全屏--&gt;</span><br><span class="line">       &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;</span><br><span class="line">   &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>是不是很简单，如上方声明好一个<code>Style</code>后，怎么使用呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 方式1，直接继承Dialog的时候传入Style即可</span><br><span class="line">public class Dialog1 extends Dialog &#123;</span><br><span class="line">    public Dialog1(@NonNull Context context) &#123;</span><br><span class="line">      //注意此处</span><br><span class="line">        super(context, R.style.dialog_style_1);</span><br><span class="line">        setContentView(R.layout.dialog_test_layout);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//------------------</span><br><span class="line">//方式2</span><br><span class="line">Dialog dialog=new Dialog(context,R.style.dialog_style_1);</span><br></pre></td></tr></table></figure>
+<p>上面两种实现的效果一致，是不是很简单呢？</p>
+<p>来个效果图瞅瞅效果吧，效果图如下:<br><img src="http://ozbc8g1sr.bkt.clouddn.com/Screenshot_1510504940.png" width="30%" height="30%" alt="通过Theme设置全屏Dialog "></p>
+<p>总结：此类使用<code>theme</code> 的方式去设置全屏，设置<code>windowFullscreen</code>属性为true 即可</p>
+<ul>
+<li>优点：简单，全屏</li>
+<li>缺点：会导致整个屏幕被遮盖，包括状态栏，且点击状态栏会导致状态栏再次显示（体验并不好），只适合全屏。</li>
+</ul>
+<hr>
+<h3 id="通过设置Style实现Dialog全屏2"><a href="#通过设置Style实现Dialog全屏2" class="headerlink" title="通过设置Style实现Dialog全屏2"></a><strong>通过设置Style实现Dialog全屏2</strong></h3><p>看到上面的标题，你是不是怀疑我写错了，并没有，这个也是通过Style实现的不过设置的属性和上面的不同，达到的效果也不尽相同。</p>
+<p>当然设置Style的方式和上面一样只需要换个属性就好了，按照如下设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--此属性设置的dialog可以依照布局的宽高去设定而不是wrap_content--&gt;</span><br><span class="line">    &lt;style name=&quot;dialog_style_2&quot;&gt;</span><br><span class="line">      &lt;!--注意此处--&gt;</span><br><span class="line">        &lt;item name=&quot;android:windowIsFloating&quot;&gt;false&lt;/item&gt;</span><br><span class="line">    &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>当然使用方式也是一致的，按照如之前的使用方式，只需将<code>R.style.dialog_style_1</code>更改为<code>R.style.dialog_style_2</code> 即可。</p>
+<p>看下效果图：<br><img src="http://ozbc8g1sr.bkt.clouddn.com/device-2017-11-13-010314.png" width="30%" height="30%" alt="通过Theme设置全屏Dialog "></p>
+<p>总结：此方法通过设置<code>theme</code> 的<code>windowIsFloating</code> 为false ，从而使得<code>contentView</code> 的<code>match_parent</code> 对<code>window</code>起作用，从而达到全屏的效果，否则会设置window的宽高为<code>wrap_content</code>，无法全屏,当然你可以通过设置一个空的Style,也可达到相同效果（<code>windowIsFloating</code> 默认为false），但不可以不设置Style，因为会有默认的Style。</p>
+<ul>
+<li>优点：简单，显示的window在状态栏下面</li>
+<li>缺点：粒度小，且window一直为match_parent 即使内容变小，window仍不变小 ，导致外部无法触发点击消失事件，适合显示在状态栏下全屏的dialog，只适合全屏</li>
+</ul>
+<hr>
+<h3 id="通过代码设置Dilaog全屏或者任意宽高"><a href="#通过代码设置Dilaog全屏或者任意宽高" class="headerlink" title="通过代码设置Dilaog全屏或者任意宽高"></a><strong>通过代码设置Dilaog全屏或者任意宽高</strong></h3><p>这个方法内就比较灵活了，你可以任意设置Dilaog的宽高，不过代码量也会变高，好吧，看下怎么实现。<br>上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class Dialog3 extends Dialog &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Dialog3(@NonNull Context context, float widthPercent, float heightPercent) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">        setContentView(R.layout.dialog_test_layout);</span><br><span class="line">        // 注意此方法一定要在setContentView后面，否则设置内容会被setContentView覆盖，此时由于默认没使用theme,按照默认的背景图来设置</span><br><span class="line">        // 此时再设置window的宽高进行更细致的修改window参数</span><br><span class="line">        initWidthAndHeightByPercent(widthPercent, heightPercent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 用于根据传入的宽高的比例显示window</span><br><span class="line">     */</span><br><span class="line">    private void initWidthAndHeightByPercent(float widthPercent, float heightPercent) &#123;</span><br><span class="line">        WindowManager windowManager = getWindow().getWindowManager();</span><br><span class="line">        Display display = windowManager.getDefaultDisplay();</span><br><span class="line">        WindowManager.LayoutParams lp = getWindow().getAttributes();</span><br><span class="line">        //decorView是window中的最顶层view，可以从window中获取到decorView,获取状态栏的高度</span><br><span class="line">        int statusBarHeight = getStatusBarHeight();</span><br><span class="line">        lp.width = (int) (display.getWidth() * widthPercent); //设置宽度</span><br><span class="line">        //高度值需要减去状态栏的高度</span><br><span class="line">        lp.height = (int) ((display.getHeight() - statusBarHeight) * heightPercent);</span><br><span class="line">        getWindow().setAttributes(lp);</span><br><span class="line">        // 注意此处必须设置,因为window默认会设置一个有padding 的背景</span><br><span class="line">        getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private int getStatusBarHeight() &#123;</span><br><span class="line">        int statusBarHeight1 = -1;</span><br><span class="line">        //获取status_bar_height资源的ID</span><br><span class="line">        int resourceId = getContext().getResources().getIdentifier(&quot;status_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);</span><br><span class="line">        if (resourceId &gt; 0) &#123;</span><br><span class="line">            //根据资源ID获取响应的尺寸值</span><br><span class="line">            statusBarHeight1 = getContext().getResources().getDimensionPixelSize(resourceId);</span><br><span class="line">        &#125;</span><br><span class="line">        return statusBarHeight1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不要被上面的代码吓坏了，其实内容也不多，我来讲解下主要过程，首先需要注意的就是你设置<code>window</code>的宽高的代码一定要在<code>setContentView</code>之后，原因和方法2中提到的相关，其内部会将不设置<code>android:windowIsFloating</code> 属性的<code>window</code>按照<code>wrap_content</code>来测量，所以，即使你设置<code>match_parent</code>也是无效的，而我们如果通过代码手动修改宽高当然也就达到修改的目的，如果顺序修改，就会导致<code>setContentView</code>方法将其重置。</p>
+<p>具体参考<code>PhoneWindow</code>的代码(节选)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (mIsFloating) &#123;</span><br><span class="line">    setLayout(WRAP_CONTENT, WRAP_CONTENT);</span><br><span class="line">    setFlags(0, flagsToUpdate);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码就是在<code>setContentView</code>内执行，很明显，由于你没设置<code>Style</code>，系统将会使用默认的<code>Style</code>从而导致<code>mIsFloating</code> 为<code>true</code>,然后通过代码再次修改<code>window</code>的宽高即可达到修改的结果。</p>
+<p>从上面那个比较长的代码我们也可以看出，<code>Dialog</code>的宽高是可以自己设定的，所以通过此方法可以设定<code>Dialog</code>的任意宽高。</p>
+<p>效果同效果图2，在此不重复截图了。</p>
+<p>总结：  使用代码设置宽高</p>
+<ul>
+<li><p>优点：粒度小，可以任意设置</p>
+</li>
+<li><p>缺点：操作略微复杂</p>
+</li>
+</ul>
+<hr>
+<p>##总结<br>至此你已经掌握了三种设置<code>Dilaog</code>全屏的方式和一种设置<code>Dilaog</code>任意宽高的方式，也知道了他们每个的优缺点，我将代码上传至 -&gt; <a href="http://download.csdn.net/download/guohaiyang1992/10115667" rel="external nofollow noopener noreferrer" target="_blank">CSDN</a> &lt;- 中，写了个简单的工具，后续加入动画的话，可以实现各种大小各种位置的Dialog的显示，如有疑问，欢迎留言。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/博客/" <i="" class="fa fa-tag"> 博客</a>
+          
+            <a href="/tags/源码/" <i="" class="fa fa-tag"> 源码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/98b3971c.html" rel="next" title="github 项目推荐之个人版">
+                <i class="fa fa-chevron-left"></i> github 项目推荐之个人版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/d4acd4c8.html" rel="prev" title="【Intellij Idea 插件】系列目录">
+                【Intellij Idea 插件】系列目录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjczNS85Mjk2"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="http://avatar.csdn.net/E/A/A/1_guohaiyang1992.jpg" alt="guohaiyang">
+          <p class="site-author-name" itemprop="name">guohaiyang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+        <!--外链播放器-->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=504575633&auto=0&height=66"></iframe>
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提"><span class="nav-number">2.1.</span> <span class="nav-text">前提</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-1"><span class="nav-number">3.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识-1"><span class="nav-number">4.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前提-1"><span class="nav-number">4.1.</span> <span class="nav-text">前提</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方式"><span class="nav-number">5.</span> <span class="nav-text">实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过设置Style实现Dialog全屏"><span class="nav-number">5.1.</span> <span class="nav-text">通过设置Style实现Dialog全屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过设置Style实现Dialog全屏2"><span class="nav-number">5.2.</span> <span class="nav-text">通过设置Style实现Dialog全屏2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过代码设置Dilaog全屏或者任意宽高"><span class="nav-number">5.3.</span> <span class="nav-text">通过代码设置Dilaog全屏或者任意宽高</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">guohaiyang</span>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--<div class="powered-by"> -->
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  您是本站的第<span id="busuanzi_value_site_uv"></span>个访客，欢迎您的到来
+</span>
+<!--</div>-->
+
+<!--屏蔽下方提示-->
+<!--<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div> -->
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "db.json";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("h8Ih0Dm3ikBRV6HNGyvsiu8C-gzGzoHsz", "LWjl3Esuf1ArMkWbwcPbjGqV");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</html>
+

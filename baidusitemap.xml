@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+    
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/f5c535ea.html</loc>
+    <lastmod>2017-12-26T17:44:13.297Z</lastmod>
+    <data>
+        <display>
+        <title>适配器模式</title>
+        <pubTime>2017-01-17T05:58:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>设计模式</tag>
+         
+        <tag>适配器模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://guohaiyang.tk/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/e963c21e.html</loc>
+    <lastmod>2017-12-26T17:44:13.296Z</lastmod>
+    <data>
+        <display>
+        <title>解决某些Rom中EditText无法修改光标的问题</title>
+        <pubTime>2017-06-09T02:37:00.000Z</pubTime>
+        
+        <tag>edittext</tag>
+         
+        <tag>华为</tag>
+         
+        <tag>光标</tag>
+         
+        <tag>修改颜色</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/6b3bea20.html</loc>
+    <lastmod>2017-12-26T17:44:13.295Z</lastmod>
+    <data>
+        <display>
+        <title>简单工厂模式</title>
+        <pubTime>2017-01-17T05:40:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://guohaiyang.tk/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/e00718d5.html</loc>
+    <lastmod>2017-12-26T17:44:13.294Z</lastmod>
+    <data>
+        <display>
+        <title>有关对象地址和对象关系的认识</title>
+        <pubTime>2017-03-23T02:48:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>堆</tag>
+         
+        <tag>栈</tag>
+         
+        <tag>存储</tag>
+         
+        <tag>内存</tag>
+         
+         
+           
+             
+              <breadCrumb title="android技巧" url="http://guohaiyang.tk/categories/android%E6%8A%80%E5%B7%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/c411cb4b.html</loc>
+    <lastmod>2017-12-26T17:44:13.294Z</lastmod>
+    <data>
+        <display>
+        <title>拆解PinnedHeaderListView源码</title>
+        <pubTime>2016-10-24T16:27:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>源码</tag>
+         
+        <tag>listview</tag>
+         
+        <tag>PinnedHead</tag>
+         
+        <tag>HeaderView</tag>
+         
+         
+           
+             
+              <breadCrumb title="源来如此" url="http://guohaiyang.tk/categories/%E6%BA%90%E6%9D%A5%E5%A6%82%E6%AD%A4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/9dea1882.html</loc>
+    <lastmod>2017-12-26T17:44:13.293Z</lastmod>
+    <data>
+        <display>
+        <title>对象和对象引用</title>
+        <pubTime>2017-04-21T01:23:00.000Z</pubTime>
+        
+        <tag>class</tag>
+         
+        <tag>对象</tag>
+         
+        <tag>对象引用</tag>
+         
+         
+           
+             
+              <breadCrumb title="android技巧" url="http://guohaiyang.tk/categories/android%E6%8A%80%E5%B7%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/c50b688a.html</loc>
+    <lastmod>2017-12-26T17:44:13.292Z</lastmod>
+    <data>
+        <display>
+        <title>对于RE文件管理器打开安卓手机的Sqlite文件速度很慢的解决办法</title>
+        <pubTime>2015-11-06T06:01:00.000Z</pubTime>
+        
+        <tag>Android 技术笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/f7de8aa8.html</loc>
+    <lastmod>2017-12-26T17:44:13.292Z</lastmod>
+    <data>
+        <display>
+        <title>外观模式</title>
+        <pubTime>2017-01-17T05:55:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>java</tag>
+         
+        <tag>设计模式</tag>
+         
+        <tag>外观模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="设计模式" url="http://guohaiyang.tk/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/89cc6397.html</loc>
+    <lastmod>2017-12-26T17:44:13.291Z</lastmod>
+    <data>
+        <display>
+        <title>全屏到任意宽高的Dialog的写法</title>
+        <pubTime>2017-11-13T03:47:00.000Z</pubTime>
+        
+        <tag>博客</tag>
+         
+        <tag>源码</tag>
+         
+         
+           
+             
+              <breadCrumb title="那些坑" url="http://guohaiyang.tk/categories/%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/c03edddb.html</loc>
+    <lastmod>2017-12-26T17:44:13.291Z</lastmod>
+    <data>
+        <display>
+        <title>从零写一个线程切换工具</title>
+        <pubTime>2017-04-24T13:35:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>线程切换</tag>
+         
+        <tag>主线程</tag>
+         
+        <tag>线程池</tag>
+         
+        <tag>链式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/9215f121.html</loc>
+    <lastmod>2017-12-26T17:44:13.290Z</lastmod>
+    <data>
+        <display>
+        <title>三、复合类型</title>
+        <pubTime>2017-04-18T15:59:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>c语言</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/6afb4c24.html</loc>
+    <lastmod>2017-12-26T17:44:13.290Z</lastmod>
+    <data>
+        <display>
+        <title>二、C++处理数据</title>
+        <pubTime>2017-03-19T17:05:00.000Z</pubTime>
+        
+        <tag>c语言</tag>
+         
+        <tag>sizeof</tag>
+         
+        <tag>define</tag>
+         
+        <tag>const</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/6a493b88.html</loc>
+    <lastmod>2017-12-26T17:44:13.289Z</lastmod>
+    <data>
+        <display>
+        <title>【kotlin从入门到深坑】系列目录</title>
+        <pubTime>2017-05-21T14:50:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>教程</tag>
+         
+        <tag>kotlin</tag>
+         
+        <tag>中文</tag>
+         
+        <tag>文档</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/dc6e7317.html</loc>
+    <lastmod>2017-12-26T17:44:13.289Z</lastmod>
+    <data>
+        <display>
+        <title>一、开始学习c++</title>
+        <pubTime>2017-03-16T17:25:00.000Z</pubTime>
+        
+        <tag>c语言</tag>
+         
+        <tag>namespace</tag>
+         
+        <tag>iostream</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/74742d5b.html</loc>
+    <lastmod>2017-12-26T17:44:13.288Z</lastmod>
+    <data>
+        <display>
+        <title>【kotlin从入门到深坑】之语句</title>
+        <pubTime>2017-05-22T14:14:00.000Z</pubTime>
+        
+        <tag>函数</tag>
+         
+        <tag>kotlin</tag>
+         
+        <tag>博客</tag>
+         
+        <tag>循环</tag>
+         
+        <tag>条件</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/e05a8e4d.html</loc>
+    <lastmod>2017-12-26T17:44:13.287Z</lastmod>
+    <data>
+        <display>
+        <title>【kotlin从入门到深坑】之类和继承</title>
+        <pubTime>2017-05-26T06:05:00.000Z</pubTime>
+        
+        <tag>class</tag>
+         
+        <tag>kotlin</tag>
+         
+        <tag>继承</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/cb6db1c3.html</loc>
+    <lastmod>2017-12-26T17:44:13.287Z</lastmod>
+    <data>
+        <display>
+        <title>【Kotlin从入门到深坑】之返回和跳转</title>
+        <pubTime>2017-05-31T13:13:00.000Z</pubTime>
+        
+        <tag>函数</tag>
+         
+        <tag>kotlin</tag>
+         
+        <tag>break</tag>
+         
+        <tag>continue</tag>
+         
+        <tag>标签</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/1802126c.html</loc>
+    <lastmod>2017-12-26T17:44:13.286Z</lastmod>
+    <data>
+        <display>
+        <title>【Kotlin从入门到深坑】之类的覆盖属性和方法以及抽象类</title>
+        <pubTime>2017-06-07T14:00:00.000Z</pubTime>
+        
+        <tag>class</tag>
+         
+        <tag>继承</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/8a29844e.html</loc>
+    <lastmod>2017-12-26T17:44:13.286Z</lastmod>
+    <data>
+        <display>
+        <title>【Kotlin从入门到深坑】之类的属性和字段</title>
+        <pubTime>2017-06-12T12:42:00.000Z</pubTime>
+        
+        <tag>Kotlin</tag>
+         
+        <tag>Class</tag>
+         
+        <tag>类</tag>
+         
+        <tag>字段</tag>
+         
+        <tag>属性</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/853f2571.html</loc>
+    <lastmod>2017-12-26T17:44:13.285Z</lastmod>
+    <data>
+        <display>
+        <title>【Kotlin从入门到深坑】之基础类型</title>
+        <pubTime>2017-05-21T14:46:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>kotlin</tag>
+         
+        <tag>基础类型</tag>
+         
+         
+           
+             
+              <breadCrumb title="Kotlin" url="http://guohaiyang.tk/categories/Kotlin/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/1f02658.html</loc>
+    <lastmod>2017-12-26T17:44:13.284Z</lastmod>
+    <data>
+        <display>
+        <title>【Intellij Idea 插件从入门到深坑】基础的AnAction</title>
+        <pubTime>2017-12-19T16:21:00.000Z</pubTime>
+        
+        <tag>intellij idea</tag>
+         
+        <tag>插件</tag>
+         
+        <tag>android-studio</tag>
+         
+        <tag>plugin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Intellij" url="http://guohaiyang.tk/categories/Intellij/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/d4acd4c8.html</loc>
+    <lastmod>2017-12-26T17:44:13.283Z</lastmod>
+    <data>
+        <display>
+        <title>【Intellij Idea 插件】系列目录</title>
+        <pubTime>2017-12-18T15:46:00.000Z</pubTime>
+        
+        <tag>intellij idea</tag>
+         
+        <tag>插件</tag>
+         
+        <tag>android-studio</tag>
+         
+        <tag>plugin</tag>
+         
+         
+           
+             
+              <breadCrumb title="Intellij" url="http://guohaiyang.tk/categories/Intellij/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/98b3971c.html</loc>
+    <lastmod>2017-12-26T17:44:13.282Z</lastmod>
+    <data>
+        <display>
+        <title>github 项目推荐之个人版</title>
+        <pubTime>2017-06-27T15:18:00.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+        <tag>框架</tag>
+         
+        <tag>线程</tag>
+         
+        <tag>开源</tag>
+         
+        <tag>库</tag>
+         
+         
+           
+             
+              <breadCrumb title="Github" url="http://guohaiyang.tk/categories/Github/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/4288d0c6.html</loc>
+    <lastmod>2017-12-26T17:44:13.279Z</lastmod>
+    <data>
+        <display>
+        <title>android 自定义view起步之一</title>
+        <pubTime>2016-04-18T16:31:00.000Z</pubTime>
+        
+        <tag>view</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/ec9ccc1f.html</loc>
+    <lastmod>2017-12-26T17:44:13.279Z</lastmod>
+    <data>
+        <display>
+        <title>c++ 知识汇总</title>
+        <pubTime>2017-03-16T17:18:00.000Z</pubTime>
+        
+        <tag>c语言</tag>
+         
+        <tag>c++</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/7666cf8a.html</loc>
+    <lastmod>2017-12-26T17:44:13.278Z</lastmod>
+    <data>
+        <display>
+        <title>Pro android 之一  ：初步了解android</title>
+        <pubTime>2017-04-28T01:42:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>linux kernel</tag>
+         
+        <tag>动画</tag>
+         
+         
+           
+             
+              <breadCrumb title="Pro" url="http://guohaiyang.tk/categories/Pro/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/3a575bd1.html</loc>
+    <lastmod>2017-12-26T17:44:13.277Z</lastmod>
+    <data>
+        <display>
+        <title>Java反射（一）</title>
+        <pubTime>2017-05-03T13:05:00.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>函数</tag>
+         
+        <tag>class</tag>
+         
+        <tag>对象</tag>
+         
+        <tag>反射</tag>
+         
+         
+           
+             
+              <breadCrumb title="java反射" url="http://guohaiyang.tk/categories/java%E5%8F%8D%E5%B0%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/d3d34deb.html</loc>
+    <lastmod>2017-12-26T17:44:13.276Z</lastmod>
+    <data>
+        <display>
+        <title>Android播放Gif图片</title>
+        <pubTime>2017-03-15T01:45:00.000Z</pubTime>
+        
+        <tag>Android 技术笔记</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/276dec51.html</loc>
+    <lastmod>2017-12-26T17:44:13.275Z</lastmod>
+    <data>
+        <display>
+        <title>Android技巧总结  系列一</title>
+        <pubTime>2016-10-24T14:43:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>基础</tag>
+         
+        <tag>技巧</tag>
+         
+        <tag>进阶</tag>
+         
+         
+           
+             
+              <breadCrumb title="android技巧" url="http://guohaiyang.tk/categories/android%E6%8A%80%E5%B7%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/c6da4763.html</loc>
+    <lastmod>2017-12-26T17:44:13.274Z</lastmod>
+    <data>
+        <display>
+        <title>Android实现Edittext显示下滑线的三种方法</title>
+        <pubTime>2017-03-20T12:53:00.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>字体</tag>
+         
+        <tag>edittext</tag>
+         
+        <tag>font</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://guohaiyang.tk/post/39808cf6.html</loc>
+    <lastmod>2017-12-26T17:44:13.273Z</lastmod>
+    <data>
+        <display>
+        <title>AndroidEventBus教程</title>
+        <pubTime>2016-10-26T16:08:00.000Z</pubTime>
+        
+        <tag>开源框架</tag>
+         
+        <tag>eventbus</tag>
+         
+        <tag>事件总线</tag>
+         
+        <tag>android</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://guohaiyang.tk/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
