@@ -97,7 +97,7 @@
 <meta name="description" content="Android探索之路">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Android探索之路">
-<meta property="og:url" content="http://guohaiyang.tk/tags/Kotlin/index.html">
+<meta property="og:url" content="http://guohaiyang.tk/tags/kotlin/index.html">
 <meta property="og:site_name" content="Android探索之路">
 <meta property="og:description" content="Android探索之路">
 <meta property="og:locale" content="zh-Hans">
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://guohaiyang.tk/tags/Kotlin/">
+  <link rel="canonical" href="http://guohaiyang.tk/tags/kotlin/">
 
 
 
 
 
-  <title>标签: Kotlin | Android探索之路</title>
+  <title>标签: kotlin | Android探索之路</title>
   
 
 
@@ -319,7 +319,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h2>Kotlin<small>标签</small>
+        <h2>kotlin<small>标签</small>
         </h2>
       </div>
 
@@ -331,17 +331,121 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/post/8a29844e.html" itemprop="url">
+            <a class="post-title-link" href="/post/cb6db1c3.html" itemprop="url">
               
-                <span itemprop="name">【Kotlin从入门到深坑】之类的属性和字段</span>
+                <span itemprop="name">【Kotlin从入门到深坑】之返回和跳转</span>
               
             </a>
         
       </h3>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-06-12T20:42:00+08:00" content="2017-06-12">
-          06-12
+        <time class="post-time" itemprop="dateCreated" datetime="2017-05-31T21:13:00+08:00" content="2017-05-31">
+          05-31
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/post/e05a8e4d.html" itemprop="url">
+              
+                <span itemprop="name">【kotlin从入门到深坑】之类和继承</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2017-05-26T14:05:00+08:00" content="2017-05-26">
+          05-26
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/post/74742d5b.html" itemprop="url">
+              
+                <span itemprop="name">【kotlin从入门到深坑】之语句</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2017-05-22T22:14:00+08:00" content="2017-05-22">
+          05-22
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/post/6a493b88.html" itemprop="url">
+              
+                <span itemprop="name">【kotlin从入门到深坑】系列目录</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2017-05-21T22:50:00+08:00" content="2017-05-21">
+          05-21
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/post/853f2571.html" itemprop="url">
+              
+                <span itemprop="name">【Kotlin从入门到深坑】之基础类型</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2017-05-21T22:46:00+08:00" content="2017-05-21">
+          05-21
         </time>
       </div>
 
@@ -984,96 +1088,6 @@
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
       var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
-
-  
-
-  
-
-  
-
-</body>
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/love.js"></script>
-</html>
-
-ar url = $visitors.attr('id').trim();
       var title = $visitors.attr('data-flag-title').trim();
       var query = new AV.Query(Counter);
 
